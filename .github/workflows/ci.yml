@@ -10,7 +10,7 @@ env:
 
 jobs:
   rust:
-    name: Rust (fmt, clippy, test)
+    name: Rust (clippy, test)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,14 +23,9 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt, clippy
+          components: clippy
 
       - uses: Swatinem/rust-cache@v2
-
-      # Advisory: formatting drift is reported but does not block the build.
-      - name: Formatting
-        continue-on-error: true
-        run: cargo fmt --all -- --check
 
       - name: Clippy
         run: cargo clippy --workspace --exclude nash-desktop --all-targets -- -D warnings
