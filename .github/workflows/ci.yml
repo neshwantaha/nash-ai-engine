@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # nash-store's Linux keyring backend (linux-native-sync-persistent ->
+      # dbus-secret-service -> libdbus-sys) needs the system dbus headers.
+      - name: System dependencies
+        run: sudo apt-get update && sudo apt-get install -y libdbus-1-dev pkg-config
+
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
