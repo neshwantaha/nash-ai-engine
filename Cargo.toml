@@ -12,8 +12,8 @@ members = [
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.80"
-license = "MIT OR Apache-2.0"
-repository = "https://example.invalid/nash-ai-engine"
+license = "MIT"
+repository = "https://github.com/neshwantaha/nash-ai-engine"
 description = "Nash AI Engine - universal provider-agnostic AI engine and coding agent"
 
 [workspace.dependencies]
