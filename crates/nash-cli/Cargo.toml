@@ -1,0 +1,31 @@
+[package]
+name = "nash-cli"
+description = "Nash AI Engine command line interface"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "nash"
+path = "src/main.rs"
+
+[dependencies]
+nash-core = { workspace = true }
+nash-store = { workspace = true, features = ["os-keyring"] }
+nash-agent = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "signal", "io-std", "io-util", "time"] }
+futures = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { version = "4", features = ["derive", "env"] }
+anyhow = "1"
+tracing = { workspace = true }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tokio-util = { workspace = true, features = ["rt"] }
+
+[dev-dependencies]
+wiremock = "0.6"
+tempfile = "3"

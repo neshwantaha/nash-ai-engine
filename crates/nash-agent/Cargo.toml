@@ -1,0 +1,29 @@
+[package]
+name = "nash-agent"
+description = "Nash AI Engine coding agent: tools, approval policy and the agent loop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+nash-core = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true, features = ["rt", "fs", "process", "sync", "time", "io-util"] }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+glob = "0.3"
+ignore = "0.4"
+regex = "1"
+similar = "2"
+walkdir = "2"
+url = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1", features = ["full"] }

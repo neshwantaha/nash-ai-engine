@@ -1,0 +1,65 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/nash-core",
+    "crates/nash-store",
+    "crates/nash-agent",
+    "crates/nash-cli",
+    "desktop/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+license = "MIT OR Apache-2.0"
+repository = "https://example.invalid/nash-ai-engine"
+description = "Nash AI Engine - universal provider-agnostic AI engine and coding agent"
+
+[workspace.dependencies]
+tokio = { version = "1", default-features = false }
+tokio-util = "0.7"
+futures = "0.3"
+async-trait = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+reqwest = { version = "0.12", default-features = false, features = [
+    "json",
+    "stream",
+    "rustls-tls",
+    "gzip",
+    "brotli",
+    "http2",
+] }
+bytes = "1"
+url = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde", "clock"] }
+tracing = "0.1"
+rand = "0.8"
+parking_lot = "0.12"
+base64 = "0.22"
+indexmap = { version = "2", features = ["serde"] }
+
+nash-core = { path = "crates/nash-core" }
+nash-store = { path = "crates/nash-store" }
+nash-agent = { path = "crates/nash-agent" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[profile.bench]
+opt-level = 3
+lto = "thin"
+
+# Faster incremental dev builds
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 2

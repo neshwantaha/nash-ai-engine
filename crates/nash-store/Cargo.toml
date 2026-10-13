@@ -1,0 +1,39 @@
+[package]
+name = "nash-store"
+description = "Nash AI Engine persistence: SQLite sessions/config plus OS keyring secret storage"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+nash-core = { workspace = true }
+tokio = { workspace = true, features = ["rt", "sync"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+parking_lot = { workspace = true }
+uuid = { workspace = true }
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+# `keyring` 3.x ships with **no** default backend: unless a platform feature is
+# enabled it falls back to a process-local mock store that silently drops
+# writes. Select the real OS credential store per platform.
+[target.'cfg(target_os = "windows")'.dependencies]
+keyring = { version = "3", optional = true, features = ["windows-native"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring = { version = "3", optional = true, features = ["apple-native"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3", optional = true, features = ["linux-native-sync-persistent"] }
+
+[features]
+default = ["os-keyring"]
+os-keyring = ["dep:keyring"]
+
+[dev-dependencies]
+tempfile = "3"

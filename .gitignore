@@ -1,0 +1,27 @@
+# Rust
+/target
+**/*.rs.bk
+
+# Local cargo tweaks (machine-specific target-dir)
+.cargo/
+
+# Node / frontend
+node_modules/
+desktop/dist/
+desktop/dist-ssr/
+
+# Tauri
+desktop/src-tauri/target/
+desktop/src-tauri/gen/
+
+# Local config & databases
+*.db
+*.db-journal
+nash.json
+config.json
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
